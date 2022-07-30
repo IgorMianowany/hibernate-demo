@@ -14,7 +14,7 @@ public class Employee {
                 "firstName='" + firstName + '\'' +
                 ", lastName='" + lastName + '\'' +
                 ", company='" + company + '\'' +
-                '}';
+                "}\n";
     }
 
     @Id

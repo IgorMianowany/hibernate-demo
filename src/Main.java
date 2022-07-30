@@ -1,8 +1,7 @@
-import CRUD.CreateEmployee;
-import CRUD.ReadEmployee;
-import CRUD.UpdateEmployee;
+import CRUD.*;
 import entity.Employee;
 
+import java.sql.SQLOutput;
 import java.util.Scanner;
 
 public class Main {
@@ -22,7 +21,8 @@ public class Main {
                     "2.Create employee\n" +
                     "3.Update employee\n" +
                     "4.Delete employee\n" +
-                    "5.Clear database\n" +
+                    "5.Query all employees\n" +
+                    "8.Clear database\n" +
                     "9.Exit");
 
             choice = input.nextLine();
@@ -50,6 +50,37 @@ public class Main {
 
                     CreateEmployee.createEmployee(firstName, lastName, company);
                     break;
+                }
+                case "3":{
+                    System.out.println("Input only fields you want to change");
+                    System.out.println("Employee id: ");
+                    int id = input.nextInt();
+                    input.nextLine();
+                    System.out.println("Employee first name: ");
+                    String firstName = input.nextLine();
+
+                    System.out.println("Employee last name: ");
+                    String lastName = input.nextLine();
+
+                    System.out.println("Employee company: ");
+                    String company = input.nextLine();
+
+                    UpdateEmployee.updateEmployee(id, firstName, lastName, company);
+                    break;
+                }
+                case "4":{
+                    System.out.println("Employee to delete id: ");
+                    int id = input.nextInt();
+                    input.nextLine();
+                    DeleteEmployee.deleteEmployee(id);
+                    break;
+                }
+                case "5":{
+                    System.out.println(ReadEmployee.getAllEmployees());
+                    break;
+                }
+                case "8":{
+                    ClearDatabase.clearDatabase();
                 }
             }
         }
