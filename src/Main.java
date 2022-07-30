@@ -1,18 +1,27 @@
 import CRUD.*;
 import entity.Employee;
+import entity.Manager;
+import entity.ManagerDetail;
+import org.hibernate.Session;
+import org.hibernate.SessionFactory;
+import org.hibernate.cfg.Configuration;
 
-import java.sql.SQLOutput;
 import java.util.Scanner;
 
 public class Main {
 
     public static void main(String[] args) {
 
-//        CreateEmployee.createEmployee("John", "Doe", "Microsoft");
-//        Employee employee = ReadEmployee.getEmployee(1);
-//        DeleteEmployee.deleteEmployee(1);
-//        ClearDatabase.clearDatabase();
-//        UpdateEmployee.updateEmployee(1,"Igor");
+        SessionFactory factory = new Configuration()
+                .configure("hibernate.cfg.xml")
+                .addAnnotatedClass(Employee.class)
+                .addAnnotatedClass(ManagerDetail.class)
+                .addAnnotatedClass(Manager.class)
+                .buildSessionFactory();
+
+        Session session = factory.getCurrentSession();
+
+
         final Scanner input = new Scanner(System.in);
         String choice;
         while(true){
@@ -23,6 +32,7 @@ public class Main {
                     "4.Delete employee\n" +
                     "5.Query all employees\n" +
                     "6.Custom query\n" +
+                    "7.Perform manager stuff\n" +
                     "8.Clear database\n" +
                     "9.Exit");
 
@@ -33,6 +43,10 @@ public class Main {
             }
 
             switch (choice){
+                case "8":{
+                    ClearDatabase.clearDatabase();
+                    break;
+                }
                 case "1":{
                     System.out.println("Employee id: ");
                     choice = input.nextLine();
@@ -87,10 +101,39 @@ public class Main {
                     QueryEmployees.query(choice);
                     break;
                 }
-                case "8":{
-                    ClearDatabase.clearDatabase();
+                case "7":{
+                    System.out.println("menu:\n" +
+                            "1.Add janeczek\n" +
+                            "2.Delete janeczek");
+                    choice = input.nextLine();
+                    Manager manager = new Manager("Jan", "Kurczewski", "Kurczewscy");
+                    ManagerDetail detail = new ManagerDetail("Transport","Zeglowanie");
+                    manager.setManager_detail_id(detail);
+                    switch (choice){
+                        case "1":{
+                            try(factory){
+                                session.beginTransaction();
+
+                                session.save(manager);
+
+                                session.getTransaction().commit();
+                            }
+                            break;
+                        }
+                        case "2":{
+                            try(factory){
+                                session.beginTransaction();
+                                Manager manager1 = session.get(Manager.class, 3);
+                                session.delete(manager1);
+
+                                session.getTransaction().commit();
+                            }
+                            break;
+                        }
+                    }
                     break;
                 }
+
             }
         }
 

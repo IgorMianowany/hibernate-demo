@@ -18,7 +18,12 @@ public class ClearDatabase {
         try(factory){
             session.beginTransaction();
 
+
+            session.createSQLQuery("SET FOREIGN_KEY_CHECKS = 0").executeUpdate();
             session.createSQLQuery("truncate table Employee").executeUpdate();
+            session.createSQLQuery("truncate table Manager").executeUpdate();
+            session.createSQLQuery("truncate table Manager_Detail").executeUpdate();
+            session.createSQLQuery("SET FOREIGN_KEY_CHECKS = 1").executeUpdate();
 
 
             session.getTransaction().commit();
