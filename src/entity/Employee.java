@@ -8,6 +8,14 @@ import javax.persistence.Table;
 @Entity
 @Table(name = "employee")
 public class Employee {
+    @Override
+    public String toString() {
+        return "Employee{" +
+                "firstName='" + firstName + '\'' +
+                ", lastName='" + lastName + '\'' +
+                ", company='" + company + '\'' +
+                '}';
+    }
 
     @Id
     @Column(name = "id", nullable = false)

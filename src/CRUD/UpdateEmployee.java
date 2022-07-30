@@ -5,9 +5,9 @@ import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.cfg.Configuration;
 
-public class CreateEmployee {
+public class UpdateEmployee {
 
-    public static void createEmployee(String firstName, String lastName, String company) {
+    public static void updateEmployee(int id, String firstName){
         SessionFactory factory = new Configuration()
                 .configure("hibernate.cfg.xml")
                 .addAnnotatedClass(Employee.class)
@@ -18,14 +18,9 @@ public class CreateEmployee {
         try(factory){
             session.beginTransaction();
 
-            Employee tempEmployee = new Employee(firstName, lastName, company);
-
-            session.save(tempEmployee);
-
-            System.out.println("Created employee: " + tempEmployee);
+            session.createQuery("update Employee set first_name='" + firstName + "' where id="+id).executeUpdate();
 
             session.getTransaction().commit();
         }
     }
-
 }
