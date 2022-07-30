@@ -22,6 +22,7 @@ public class Main {
                     "3.Update employee\n" +
                     "4.Delete employee\n" +
                     "5.Query all employees\n" +
+                    "6.Custom query\n" +
                     "8.Clear database\n" +
                     "9.Exit");
 
@@ -79,8 +80,16 @@ public class Main {
                     System.out.println(ReadEmployee.getAllEmployees());
                     break;
                 }
+                case "6":{
+                    System.out.println("Input your query: ");
+                    choice = input.nextLine();
+
+                    QueryEmployees.query(choice);
+                    break;
+                }
                 case "8":{
                     ClearDatabase.clearDatabase();
+                    break;
                 }
             }
         }
