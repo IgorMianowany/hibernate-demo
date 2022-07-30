@@ -17,6 +17,9 @@ public class ManagerDetail {
     @Column(name = "hobby")
     private String hobby;
 
+    @OneToOne(mappedBy = "manager_detail_id")
+    private Manager manager;
+
     public ManagerDetail() {
     }
 
@@ -56,5 +59,13 @@ public class ManagerDetail {
                 ", department='" + department + '\'' +
                 ", hobby='" + hobby + '\'' +
                 "}\n";
+    }
+
+    public Manager getManager() {
+        return manager;
+    }
+
+    public void setManager(Manager manager) {
+        this.manager = manager;
     }
 }
