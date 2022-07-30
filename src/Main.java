@@ -103,42 +103,35 @@ public class Main {
                 }
                 case "7":{
                     System.out.println("menu:\n" +
-                            "1.Add Janeczek\n" +
+                            "1.Create Janeczek\n" +
                             "2.Delete Janeczek\n" +
-                            "3.Get manager from manager detail id");
+                            "3.Get every manager\n" +
+                            "4.Get manager from manager detail id");
                     choice = input.nextLine();
-                    Manager manager = new Manager("Jan", "Kurczewski", "Kurczewscy");
-                    ManagerDetail detail = new ManagerDetail("Transport","Zeglowanie");
-                    manager.setManager_detail_id(detail);
                     switch (choice){
                         case "1":{
-                            try(factory){
-                                session.beginTransaction();
-                                session.save(manager);
-                                session.getTransaction().commit();
-                            }
+                            CreateManager.createManager();
                             break;
                         }
                         case "2":{
+                            System.out.println("Manager to delete id: ");
+                            int id = input.nextInt();
+                            input.nextLine();
                             try(factory){
-                                session.beginTransaction();
-                                Manager manager1 = session.get(Manager.class, 3);
-                                session.delete(manager1);
-                                session.getTransaction().commit();
+                                DeleteManager.deleteManager(id);
                             }
                             break;
                         }
                         case "3":{
-                            try(factory){
-                                session.beginTransaction();
-                                System.out.println("Manager detail id: ");
-                                int id = input.nextInt();
-                                input.nextLine();
-                                ManagerDetail managerDetail = session.get(ManagerDetail.class, id);
-                                System.out.println("Manager associated with " + managerDetail + "/nis: " + managerDetail.getManager());
-                                session.getTransaction().commit();
-                                break;
-                            }
+                            ReadManager.readEveryManager();
+                            break;
+                        }
+                        case "4":{
+                            System.out.println("Manager detail id: ");
+                            int id = input.nextInt();
+                            input.nextLine();
+                            ReadManager.readManagerFromDetailId(id);
+                            break;
                         }
                     }
                     break;
