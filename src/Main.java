@@ -106,7 +106,8 @@ public class Main {
                             "1.Create Janeczek\n" +
                             "2.Delete Janeczek\n" +
                             "3.Get every manager\n" +
-                            "4.Get manager from manager detail id");
+                            "4.Get manager from manager detail id\n" +
+                            "5.Add all employees to manager");
                     choice = input.nextLine();
                     switch (choice){
                         case "1":{
@@ -131,6 +132,13 @@ public class Main {
                             int id = input.nextInt();
                             input.nextLine();
                             ReadManager.readManagerFromDetailId(id);
+                            break;
+                        }
+                        case "5":{
+                            System.out.println("Manager id: ");
+                            int id = input.nextInt();
+                            input.nextLine();
+                            UpdateManager.addAllEmployeesToManager(id);
                             break;
                         }
                     }

@@ -1,23 +1,13 @@
 package entity;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
 
 @Entity
 @Table(name = "employee")
 public class Employee {
-    @Override
-    public String toString() {
-        return "Employee{" +
-                "firstName='" + firstName + '\'' +
-                ", lastName='" + lastName + '\'' +
-                ", company='" + company + '\'' +
-                "}\n";
-    }
 
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id", nullable = false)
     private int id;
 
@@ -27,8 +17,11 @@ public class Employee {
     @Column(name = "last_name")
     private String lastName;
 
-    @Column(name = "company")
-    private String company;
+    @ManyToOne(cascade = {CascadeType.DETACH, CascadeType.MERGE, CascadeType.PERSIST, CascadeType.REFRESH})
+    @JoinColumn(name = "manager_id")
+    private Manager manager;
+
+
 
     public Employee() {
     }
@@ -36,7 +29,6 @@ public class Employee {
     public Employee(String firstName, String lastName, String company) {
         this.firstName = firstName;
         this.lastName = lastName;
-        this.company = company;
     }
 
     public int getId() {
@@ -63,11 +55,22 @@ public class Employee {
         this.lastName = lastName;
     }
 
-    public String getCompany() {
-        return company;
+
+    public Manager getManager() {
+        return manager;
     }
 
-    public void setCompany(String company) {
-        this.company = company;
+    public void setManager(Manager manager) {
+        this.manager = manager;
+    }
+
+    @Override
+    public String toString() {
+        return "Employee{" +
+                "id=" + id +
+                ", firstName='" + firstName + '\'' +
+                ", lastName='" + lastName + '\'' +
+                ", manager=" + manager +
+                '}';
     }
 }

@@ -1,5 +1,6 @@
 package CRUD;
 
+import entity.Employee;
 import entity.Manager;
 import entity.ManagerDetail;
 import org.hibernate.Session;
@@ -14,6 +15,7 @@ public class ReadManager {
     public static void readManager(int id){
         SessionFactory factory = new Configuration()
                 .configure("hibernate.cfg.xml")
+                .addAnnotatedClass(Employee.class)
                 .addAnnotatedClass(Manager.class)
                 .addAnnotatedClass(ManagerDetail.class)
                 .buildSessionFactory();
@@ -39,6 +41,7 @@ public class ReadManager {
     public static void readManagerFromDetailId(int detailId){
         SessionFactory factory = new Configuration()
                 .configure("hibernate.cfg.xml")
+                .addAnnotatedClass(Employee.class)
                 .addAnnotatedClass(Manager.class)
                 .addAnnotatedClass(ManagerDetail.class)
                 .buildSessionFactory();
@@ -66,6 +69,7 @@ public class ReadManager {
     public static void readEveryManager() {
         SessionFactory factory = new Configuration()
                 .configure("hibernate.cfg.xml")
+                .addAnnotatedClass(Employee.class)
                 .addAnnotatedClass(Manager.class)
                 .addAnnotatedClass(ManagerDetail.class)
                 .buildSessionFactory();

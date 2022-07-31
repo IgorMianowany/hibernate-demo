@@ -7,9 +7,11 @@ import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.cfg.Configuration;
 
-public class CreateManager {
+import java.util.List;
 
-    public static void createManager() {
+public class UpdateManager {
+
+    public static void addAllEmployeesToManager(int id){
         SessionFactory factory = new Configuration()
                 .configure("hibernate.cfg.xml")
                 .addAnnotatedClass(Employee.class)
@@ -22,13 +24,24 @@ public class CreateManager {
         try{
             session.beginTransaction();
 
-            Manager manager = new Manager("Jan", "Kurczewski", "Kurczewscy");
-            ManagerDetail detail = new ManagerDetail("Transport","Zeglowanie");
-            manager.setManager_detail_id(detail);
+            Manager manager = session.get(Manager.class,id);
 
-            session.save(manager);
+            System.out.println("Manager: " + manager);
 
-            System.out.println("Created manager: " + manager);
+            Employee employee1 = new Employee("Igor", "Mianowany", "Firma");
+            Employee employee2 = new Employee("Filip", "Mianowany", "Firma");
+            Employee employee3 = new Employee("Filip", "Kurczewski", "Firma");
+
+            manager.add(employee1);
+            manager.add(employee2);
+            manager.add(employee3);
+
+            System.out.println("Manager's employees: " + manager.getEmployeeList());
+
+            session.save(employee1);
+            session.save(employee2);
+            session.save(employee3);
+
 
             session.getTransaction().commit();
         }

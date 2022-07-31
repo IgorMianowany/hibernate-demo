@@ -58,7 +58,7 @@ public class ManagerDetail {
                 "id=" + id +
                 ", department='" + department + '\'' +
                 ", hobby='" + hobby + '\'' +
-                "}\n";
+                "}";
     }
 
     public Manager getManager() {
