@@ -28,20 +28,16 @@ public class UpdateManager {
 
             System.out.println("Manager: " + manager);
 
-            Employee employee1 = new Employee("Igor", "Mianowany", "Firma");
-            Employee employee2 = new Employee("Filip", "Mianowany", "Firma");
-            Employee employee3 = new Employee("Filip", "Kurczewski", "Firma");
+            List<Employee> employees = session.createQuery("from Employee", Employee.class).getResultList();
 
-            manager.add(employee1);
-            manager.add(employee2);
-            manager.add(employee3);
+            employees.forEach(employee -> {
+                manager.add(employee);
+                employee.setManager(manager);
+                session.save(manager);
+                session.save(employee);
+            });
 
             System.out.println("Manager's employees: " + manager.getEmployeeList());
-
-            session.save(employee1);
-            session.save(employee2);
-            session.save(employee3);
-
 
             session.getTransaction().commit();
         }

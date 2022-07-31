@@ -21,9 +21,9 @@ public class DeleteManager {
 
         try{
             session.beginTransaction();
-            Manager manager = session.get(Manager.class, id);
-            session.delete(manager);
-
+//            Manager manager = session.get(Manager.class, id);
+//            session.delete(manager);
+            session.createQuery("delete from Manager where id="+id);
             session.getTransaction().commit();
         }
         catch (Exception e){

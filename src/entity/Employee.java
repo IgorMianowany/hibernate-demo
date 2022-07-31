@@ -22,11 +22,10 @@ public class Employee {
     private Manager manager;
 
 
-
     public Employee() {
     }
 
-    public Employee(String firstName, String lastName, String company) {
+    public Employee(String firstName, String lastName) {
         this.firstName = firstName;
         this.lastName = lastName;
     }
@@ -71,6 +70,6 @@ public class Employee {
                 ", firstName='" + firstName + '\'' +
                 ", lastName='" + lastName + '\'' +
                 ", manager=" + manager +
-                '}';
+                "}\n";
     }
 }

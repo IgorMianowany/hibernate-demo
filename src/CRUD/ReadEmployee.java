@@ -38,6 +38,8 @@ public class ReadEmployee {
         SessionFactory factory = new Configuration()
                 .configure("hibernate.cfg.xml")
                 .addAnnotatedClass(Employee.class)
+                .addAnnotatedClass(Manager.class)
+                .addAnnotatedClass(ManagerDetail.class)
                 .buildSessionFactory();
 
         Session session = factory.getCurrentSession();

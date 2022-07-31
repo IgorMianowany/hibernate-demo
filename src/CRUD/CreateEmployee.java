@@ -22,7 +22,7 @@ public class CreateEmployee {
         try(factory){
             session.beginTransaction();
 
-            Employee tempEmployee = new Employee(firstName, lastName, company);
+            Employee tempEmployee = new Employee(firstName, lastName);
 
             session.save(tempEmployee);
 
